@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/zack/Desktop/flutter_app/flutter-camera/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-pt/values-pt.xml",
+            "map": [
+                {
+                    "source": "/home/zack/.gradle/caches/transforms-1/files-1.1/core-1.0.0.aar/103cbeb4ae50321c24d2669a132ce463/res/values-pt/values-pt.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        }
+    ]
+}

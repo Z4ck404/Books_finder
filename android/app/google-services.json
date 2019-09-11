@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "994234700470",
+    "firebase_url": "https://booksfinder-250413.firebaseio.com",
+    "project_id": "booksfinder-250413",
+    "storage_bucket": "booksfinder-250413.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994234700470:android:f39dd8bff396dba6",
+        "android_client_info": {
+          "package_name": "com.example.camera"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "994234700470-n3p1cuo18d30fkiutad1438g0ev1bm9p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOLE7VtH_SmSl8pmYHOzwmDPrHFUK_2ws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "994234700470-n3p1cuo18d30fkiutad1438g0ev1bm9p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994234700470:android:8171bbd053df2b35",
+        "android_client_info": {
+          "package_name": "com.example.mlkitocr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "994234700470-n3p1cuo18d30fkiutad1438g0ev1bm9p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOLE7VtH_SmSl8pmYHOzwmDPrHFUK_2ws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "994234700470-n3p1cuo18d30fkiutad1438g0ev1bm9p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
