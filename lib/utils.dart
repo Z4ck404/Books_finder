@@ -23,7 +23,7 @@ Future <Book> get_review(String imagePath) async {
     var info = new List<String>();
     String isbn = await decode(imagePath);
     //print(isbn);
-    String url = "https://www.goodreads.com/book/isbn?FORMAT=json&key=9bULmQrYAiuNwF1x0V4e9Q&isbn=" + isbn;
+    String url = "https://www.goodreads.com/book/isbn?FORMAT=json&key=[your goodreads API here]&isbn=" + isbn;
     final response = await http.get(url);
     var book = new Book(" "," "," "," "," "," "," ");
     if (response.statusCode == 200) {
