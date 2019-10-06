@@ -1,5 +1,7 @@
-# Books_finder
+# Books_finder :blue_book:
 a flutter app to get books info and reviews from good reads by taking the isbn code photo using firebase machine learning kit 
+
+
 
 ## what you need to do before running the app : 
 - Create a firebase app and connect it with ml-kit and downlod the goodle-config json file and add to /android/app
