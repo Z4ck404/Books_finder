@@ -1,99 +1,119 @@
-import 'dart:async';
-import 'dart:io';
-
-import 'package:camera/camera.dart';
-import 'package:camera_app/display.dart';
+import 'package:course_app/constants.dart';
+import 'package:course_app/details_screen.dart';
+import 'package:course_app/model/category.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart' show join;
-import 'package:path_provider/path_provider.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-Future<void> main() async {
-  final cameras = await availableCameras();
+void main() => runApp(MyApp());
 
-  final firstCamera = cameras.first;
-
-  runApp(
-    MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: Camera(
-        camera: firstCamera,
-      ),
-    ),
-  );
-}
-
-class Camera extends StatefulWidget {
-  final CameraDescription camera;
-
-  const Camera({
-    Key key,
-    @required this.camera,
-  }) : super(key: key);
-
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
-  CameraState createState() => CameraState();
-}
-
-class CameraState extends State<Camera> {
-  CameraController _controller;
-  Future<void> _initializeControllerFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = CameraController(
-      widget.camera,
-      ResolutionPreset.medium,
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Course App',
+      theme: ThemeData(),
+      home: DetailsScreen(),
     );
-
-    _initializeControllerFuture = _controller.initialize();
   }
+}
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Take a Picture')),
-      body: FutureBuilder<void>(
-        future: _initializeControllerFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return CameraPreview(_controller);
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.camera_alt),
-        onPressed: () async {
-          try {
-            await _initializeControllerFuture;
-
-            final path = join(
-              (await getTemporaryDirectory()).path,
-              '${DateTime.now()}.png',
-            );
-
-            await _controller.takePicture(path);
-
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Detail(imagePath: path),
+      body: Padding(
+        padding: EdgeInsets.only(left: 20, top: 50, right: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                SvgPicture.asset("assets/icons/menu.svg"),
+                Image.asset("assets/images/user.png"),
+              ],
+            ),
+            SizedBox(height: 30),
+            Text("Hey Alex,", style: kHeadingextStyle),
+            Text("Find a course you want to learn", style: kSubheadingextStyle),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 30),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              height: 60,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Color(0xFFF5F5F7),
+                borderRadius: BorderRadius.circular(40),
               ),
-            );
-          } catch (e) {
-            print(e);
-          }
-        },
+              child: Row(
+                children: <Widget>[
+                  SvgPicture.asset("assets/icons/search.svg"),
+                  SizedBox(width: 16),
+                  Text(
+                    "Search for anything",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Color(0xFFA0A5BD),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text("Category", style: kTitleTextStyle),
+                Text(
+                  "See All",
+                  style: kSubtitleTextSyule.copyWith(color: kBlueColor),
+                ),
+              ],
+            ),
+            SizedBox(height: 30),
+            Expanded(
+              child: StaggeredGridView.countBuilder(
+                padding: EdgeInsets.all(0),
+                crossAxisCount: 2,
+                itemCount: categories.length,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
+                itemBuilder: (context, index) {
+                  return Container(
+                    padding: EdgeInsets.all(20),
+                    height: index.isEven ? 200 : 240,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      image: DecorationImage(
+                        image: AssetImage(categories[index].image),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          categories[index].name,
+                          style: kTitleTextStyle,
+                        ),
+                        Text(
+                          '${categories[index].numOfCourses} Courses',
+                          style: TextStyle(
+                            color: kTextColor.withOpacity(.5),
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                },
+                staggeredTileBuilder: (index) => StaggeredTile.fit(1),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
-
